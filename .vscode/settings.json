@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/d91777a5-f9ba-4469-9635-1ad0c79bcc21/resourceGroups/TP2/providers/Microsoft.Web/sites/dcp-backend-tp2",
+    "appService.deploySubpath": "."
+}
