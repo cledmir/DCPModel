@@ -3,8 +3,26 @@ import numpy as np
 import tensorflow as tf
 import cv2
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import pyrebase
+import os
+from uvicorn import run
+
+
 app = FastAPI()
+
+
+origins = ["*"]
+methods = ["*"]
+headers = ["*"]
+
+app.add_middleware(
+    CORSMiddleware, 
+    allow_origins = origins,
+    allow_credentials = True,
+    allow_methods = methods,
+    allow_headers = headers    
+)
 
 config = {
     "apiKey": "AIzaSyCwqnqhGalmMpLzYew2u2aHZ6Loi7j0Cqo",
@@ -24,6 +42,8 @@ try:
     model = tf.keras.models.load_model("model.h5")
 except:
     None
+    
+    
 
 # Función para leer una imagen de Firebase
 def read_image_from_firebase(url):
@@ -60,4 +80,9 @@ async def predict(url: str):
     prediction_labels = [labels[i] for i in np.argmax(predictions, axis=1)]
     
     # Devuelve la respuesta JSON
-    return {"filename": url, "prediction": prediction_labels[0], "Precisión": predictions[0][np.argmax(predictions, axis=1)][0]*100}
+    return {"filename": url, "prediction": prediction_labels[0], "probability": predictions[0][np.argmax(predictions, axis=1)][0]*100}
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    run(app, host="0.0.0.0", port=port)
