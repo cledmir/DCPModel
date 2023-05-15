@@ -1,7 +1,8 @@
-fastapi
-numpy
-opencv-python
-Pyrebase
-tensorflow
-uvicorn
-gunicorn
+fastapi==0.95.1
+numpy==1.23.5
+opencv-python==4.7.0.72
+requests==2.30.0
+tensorflow-cpu==2.12.0
+uvicorn==0.22.0
+gunicorn==20.1.0
+
