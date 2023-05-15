@@ -3,6 +3,8 @@ FROM python:3.9-slim-buster
 # Maintainer info
 LABEL maintainer="u20181a275@upc.edu.pe"
 RUN apt-get update && apt-get install -y libgl1-mesa-glx
+RUN apt-get update && apt-get install -y libglib2.0-0
+
 # Make working directories
 RUN  mkdir -p  /DCPModel
 WORKDIR  /DCPModel
